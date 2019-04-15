@@ -1,22 +1,22 @@
 terraform {
   backend "s3" {
-    bucket = "savescraped1" # ! REPLACE WITH YOUR TERRAFORM BACKEND BUCKET
+    bucket = "savescraped" # ! REPLACE WITH YOUR TERRAFORM BACKEND BUCKET
     key    = "terraform.tfstate"
-    region = "us-east-2"
+    region = "ap-southeast-1"
   }
 }
 variable "S3_BACKEND_BUCKET" {
-  default = "savescraped1" # ! REPLACE WITH YOUR TERRAFORM BACKEND BUCKET
+  default = "savescraped" # ! REPLACE WITH YOUR TERRAFORM BACKEND BUCKET
 }
 
 variable "S3_BUCKET_REGION" {
   type    = "string"
-  default = "us-east-2"
+  default = "ap-southeast-1"
 }
 
 variable "AWS_REGION" {
   type    = "string"
-  default = "us-east-2"
+  default = "ap-southeast-1"
 }
 
 variable "TAG_ENV" {
