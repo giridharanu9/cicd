@@ -12,19 +12,18 @@ This is a simple project of deploying an docker image hosted on AWS Elastic Cont
 Clone the project and navigate to the aws_python_terraform project, 
 
     
-    git clone https://github.com/vjsairam/DevOps.git
-    cd Cloud_Containers/aws_python_terraform/
+    git clone https://github.com/giridharanu9/cicd.git
     
 
 *The project assumes that the user has the best understanding on the [Best Practices for Managing AWS Access Keys](https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html) or Using any third party tools like Vault.* 
 
-1. Create Backend state for Terraform State - Create a S3 bucket in the region that you are going to run this project. The bucket name is referenced in [vars.tf](https://github.com/vjsairam/DevOps/blob/master/Cloud_Containers/aws_python_terraform/terraform/vars.tf), remember the bucket name is unique and replace it with your bucket name. 
+1. Create Backend state for Terraform State - Create a S3 bucket in the region that you are going to run this project. The bucket name is referenced in [vars.tf](https://github.com/giridharanu9/cicd/blob/master/terraform/vars.tf), remember the bucket name is unique and replace it with your bucket name. 
 
 2. Start with terraform init to provision the infrastructure,
-`aws_python_terraform/terraform/]$ terraform init`
+`terraform/]$ terraform init`
 
 3. AWS Elastic Container registry (ECR) is used to store docker images, if you are using any private registry or docker registry, please skip this step and configure the terraform parameters accordingly. Create a respository and make a note of the repository URL in the output, 
-`aws_python_terraform/terraform/]$ terraform apply --target aws_ecr_repository.myapp`
+`terraform/]$ terraform apply --target aws_ecr_repository.myapp`
 *You can export the repository URL to push the docker images or directly use this URL*
 
 4. Build and Push Images to AWS,
@@ -33,17 +32,17 @@ Clone the project and navigate to the aws_python_terraform project,
     
     ii. If you are using your personal computer, then you will need AWS CLI tools to push images to ECR. Refer to this [page](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) for installation details,
 
-    `Cloud_Containers/aws_python_terraform/terraform/]$  $(aws ecr get-login --region us-east-1 --no-include-email)`
+    `terraform/]$  $(aws ecr get-login --region us-east-1 --no-include-email)`
 
     iii. Use the below command to build, tag and deploy, 
 
-        aws_python_terraform/demo/]$  docker build -t myapp . 
-        aws_python_terraform/demo/]$  docker tag myapp <include_myapp-repo>:latest
-        aws_python_terraform/demo/]$  docker push <include_myapp-repo>:latest 
+        docker/myapp/]$  docker build -t myapp . 
+        docker/myapp/]$  docker tag myapp <include_myapp-repo>:latest
+        docker/myapp/]$  docker push <include_myapp-repo>:latest 
 
 	iv. Use the below command to apply the changes, 
     
-    	aws_python_terraform/terraform/]$ terraform apply
+    	terraform/]$ terraform apply
        
     v. The terraform changes would take a couple of minutes to make the changes live and the DNS name shall be displayed as the output. 
 
@@ -52,22 +51,22 @@ NOTE: Use `terraform destroy` to delete all the resources that was created.
 
 **Configuration Files Explained**
 
-Terraform Files - https://github.com/vjsairam/DevOps/tree/master/Cloud_Containers/aws_python_terraform/terraform
+Terraform Files - https://github.com/giridharanu9/cicd/tree/master/terraform
 
-1. Vars - https://github.com/vjsairam/DevOps/blob/master/Cloud_Containers/aws_python_terraform/terraform/vars.tf
+1. Vars - https://github.com/giridharanu9/cicd/blob/master/terraform/vars.tf
 
 	***TODO*** - Include the unique S3 bucket name in the same region that was created. 
 
-2. Cloudwatch -  https://github.com/vjsairam/DevOps/blob/master/Cloud_Containers/aws_python_terraform/terraform/cloudwatch.tf
+2. Cloudwatch -  https://github.com/giridharanu9/cicd/blob/master/terraform/cloudwatch.tf
  
 	***TODO / Improvements*** - To run the service at regurlar intervals, include [Scheduled tasks](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduled_tasks.html) / include it in the terraform configuration file. 
 
-Docker/Application Files - https://github.com/vjsairam/DevOps/tree/master/Cloud_Containers/aws_python_terraform/demo
+Docker/Application Files - https://github.com/giridharanu9/cicd/tree/master/docker/myapp
 
-1. Application File - https://github.com/vjsairam/DevOps/blob/master/Cloud_Containers/aws_python_terraform/demo/app.py
+1. Application File - https://github.com/giridharanu9/cicd/blob/master/docker/myapp/server.js
 
     ***TODO*** - Include the URL that needs to be scraped. 
 
-2. DockerFile - https://github.com/vjsairam/DevOps/blob/master/Cloud_Containers/aws_python_terraform/demo/Dockerfile
+2. DockerFile - https://github.com/giridharanu9/cicd/blob/master/docker/myapp/Dockerfile
 
     ***TODO / Improvements*** - This is a simple project explaining the scraping of a website, the DockerFile and the Application File can be extended to any operations.
