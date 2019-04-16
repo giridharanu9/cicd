@@ -63,11 +63,3 @@ Terraform Files - https://github.com/giridharanu9/cicd/tree/master/terraform
 	***TODO / Improvements*** - To run the service at regurlar intervals, include [Scheduled tasks](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduled_tasks.html) / include it in the terraform configuration file. 
 
 Docker/Application Files - https://github.com/giridharanu9/cicd/tree/master/docker/myapp
-
-1. Application File - https://github.com/giridharanu9/cicd/blob/master/docker/myapp/server.js
-
-    ***TODO*** - Include the URL that needs to be scraped. 
-
-2. DockerFile - https://github.com/giridharanu9/cicd/blob/master/docker/myapp/Dockerfile
-
-    ***TODO / Improvements*** - This is a simple project explaining the scraping of a website, the DockerFile and the Application File can be extended to any operations.
