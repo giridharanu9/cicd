@@ -6,6 +6,7 @@ The project is to demonstrate the use of AWS Fargate, which alows you to run con
 
 This is a simple project of deploying an docker image hosted on AWS Elastic Container Repository(ECR) to ECS Fargate. The stack can be changed with the respective terraform variables and modules.  The overall objective is to setup up a webserver running on AWS Fargate, accessible through an Application Load Balancer. 
 
+The Source code in GitHub is integrated with Jenkins through webhooks, any changes on the code will trigger a build in Jenkins. The Jenkinsfile would be establishing the end to end pipeline. Terraform scripts would be responsible to created the required infrastructure (Launch Configuration, Auto Scaling Group, Elastic Load Balancer), through terraform files. The build process is carried out to build the image, defined in the Dockerfile. 
 
 **Project Setup**
 
